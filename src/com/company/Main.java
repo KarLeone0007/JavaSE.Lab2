@@ -4,7 +4,7 @@ import com.company.classes.DataOwnerCar;
 import com.company.classes.Parking;
 import com.company.classes.ParkingPlace;
 
-public class Main {
+class Main {
 
     public static void main(String[] args) {
         Parking parking = new Parking(100);
@@ -23,6 +23,8 @@ public class Main {
         parking.addAfterSurname(
                 new ParkingPlace(6, new DataOwnerCar("abcd", "", ""), "Porshe", true, false), "abc"
         );
+        System.out.println(parking.toString());
+        parking.clearArray();
         System.out.println(parking.toString());
 
     }

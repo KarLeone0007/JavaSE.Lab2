@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 public class Parking {
     private ParkingPlace[] list;
-    private final int MAX_PARKING_PLACE = 100;
 
     public Parking() {
         this.list = new ParkingPlace[0];
@@ -81,7 +80,8 @@ public class Parking {
     }
 
     public void getFreePlace() {
-        for (int i = 0; i < this.MAX_PARKING_PLACE; ++i) {
+        int MAX_PARKING_PLACE = 100;
+        for (int i = 0; i < MAX_PARKING_PLACE; ++i) {
             if (this.list[i] == null) {
                 System.out.println(i + " ");
             }
@@ -90,9 +90,9 @@ public class Parking {
 
     public void addAfterSurname(ParkingPlace parkingPlace, String surname) {
         int indexSurname = -1;
-        for (int i = 0; i < this.list.length; ++i) {
-            if (this.list[i].getData().getSurName().equals(surname)) {
-                indexSurname = this.list[i].getData().getSurName().indexOf(surname);
+        for (ParkingPlace place : this.list) {
+            if (place.getData().getSurName().equals(surname)) {
+                indexSurname = place.getData().getSurName().indexOf(surname);
                 break;
             }
         }
