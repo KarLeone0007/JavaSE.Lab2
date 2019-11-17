@@ -1,67 +1,39 @@
 package com.company.classes;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Parking {
-    private ParkingPlace[] list;
-    private final int MAX_PARKING_PLACE = 100;
+    private final ArrayList <ParkingPlace> List;
 
     public Parking() {
-        this.list = new ParkingPlace[0];
+        this.List = new ArrayList<>();
     }
 
     public Parking(int length) {
-        this.list = new ParkingPlace[length];
+        this.List = new ArrayList<>(length);
     }
 
-    private void resizeArray(int newLength) {
-        ParkingPlace[] tempArray;
-        tempArray = Arrays.copyOf(this.list, newLength);
-        this.list = tempArray;
-    }
-
-    public void addIndex(ParkingPlace parkingPlace, int position) {
-        if (position >= this.list.length) {
-            this.resizeArray(position + 1);
-            this.list[position] = parkingPlace;
-        }
-        else if (position >= 0) {
-            this.list[position] = parkingPlace;
+    public void addIndex(int position, ParkingPlace parkingPlace) {
+        if (position >= 0 && position <= this.List.size()) {
+            this.List.add(position, parkingPlace);
         }
     }
 
     public void add(ParkingPlace parkingPlace) {
-
-        if (this.list.length != 0 && this.list[this.list.length - 1] == null) {
-            for (int i = 0; i < this.list.length; ++i) {
-                if (list[i] == null) {
-                    list[i] = parkingPlace;
-                    break;
-                }
-            }
-        }
-        else {
-            addIndex(parkingPlace, this.list.length);
-        }
+        this.List.add(parkingPlace);
     }
 
 
     private ParkingPlace removeIndex(int position) {
-        if (position >= 0 && position < this.list.length) {
-            ParkingPlace parkingPlace = this.list[position];
-            if (list.length - 1 - position >= 0)
-                System.arraycopy(list, position + 1, list, position, list.length - 1 - position);
-
-            resizeArray(this.list.length - 1);
-            return parkingPlace;
+        if(position >= 0 && position < this.List.size()) {
+            return this.List.remove(position);
         }
-        else {
-            return null;
-        }
+        return null;
     }
+
     public Parking isNotPayed() {
         Parking parking = new Parking();
-        for (ParkingPlace parkingPlace:this.list) {
+        for (ParkingPlace parkingPlace:this.List) {
             if (parkingPlace != null && !parkingPlace.isMonthlyPayments()) {
                 parking.add(parkingPlace);
             }
@@ -69,47 +41,39 @@ public class Parking {
         return parking;
     }
 
-    public Parking eraseBySurName(String _surname) {
-        Parking parking = new Parking();
-        for (int i = 0; i < this.list.length; i++) {
-            if (this.list[i].getData().getSurName().equals(_surname)) {
-                parking.add(removeIndex(i));
-                i = 0;
-            }
-        }
-        return parking;
+    public void eraseBySurName(String _surname) {
+        this.List.removeIf(parkingPlace -> parkingPlace.getData().getSurName().equals(_surname));
     }
 
     public void getFreePlace() {
-        for (int i = 0; i < this.MAX_PARKING_PLACE; ++i) {
-            if (this.list[i] == null) {
-                System.out.println(i + " ");
-            }
-        }
+
     }
 
     public void addAfterSurname(ParkingPlace parkingPlace, String surname) {
-        int indexSurname = -1;
-        for (int i = 0; i < this.list.length; ++i) {
-            if (this.list[i].getData().getSurName().equals(surname)) {
-                indexSurname = this.list[i].getData().getSurName().indexOf(surname);
+        int indexSurname = 0;
+        for (ParkingPlace _parkingPlace: this.List) {
+            if (
+                    _parkingPlace.getData().getSurName().equals(surname)
+            ) {
+                indexSurname = _parkingPlace.getData().getSurName().indexOf(surname);
                 break;
             }
         }
-        if (indexSurname >= 0) {
-            addIndex(parkingPlace, indexSurname + 1);
+        if (indexSurname != -1) {
+            addIndex(indexSurname + 1, parkingPlace);
         }
     }
 
 
+
     public void clearArray() {
-        resizeArray(0);
+        this.List.clear();
     }
 
     @Override
     public String toString() {
         return "Parking{" +
-                "list=" + Arrays.toString(list) +
+                "List=" + this.List +
                 '}';
     }
 }

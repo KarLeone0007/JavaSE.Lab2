@@ -13,6 +13,10 @@ public class ParkingPlace {
         return data;
     }
 
+    public boolean isParking() {
+        return isParking;
+    }
+
     public ParkingPlace(int _numberPlace, DataOwnerCar _data, String _carModel, boolean _isParking, boolean _isMonthlyPayments) {
         this.numberPlace = _numberPlace;
         this.data = _data;
@@ -35,4 +39,6 @@ public class ParkingPlace {
                 ", isMonthlyPayments=" + this.isMonthlyPayments +
                 '}';
     }
+
+
 }
