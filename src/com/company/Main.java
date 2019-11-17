@@ -17,9 +17,9 @@ public class Main {
         parking.add(new ParkingPlace(4, new DataOwnerCar("", "", ""), "", true, false));
         parking.add(new ParkingPlace(5, new DataOwnerCar("", "", ""), "", true, false));
 
-        //System.out.println(parking.isNotPayed());
-        //System.out.println(parking.eraseBySurName("abc"));
-        //parking.getFreePlace();
+        System.out.println(parking.isNotPayed());
+        System.out.println(parking.eraseBySurName("abc"));
+        parking.getFreePlace();
         parking.addAfterSurname(
                 new ParkingPlace(6, new DataOwnerCar("abcd", "", ""), "Porshe", true, false), "abc"
         );
