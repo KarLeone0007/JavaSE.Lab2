@@ -7,7 +7,8 @@ import com.company.classes.ParkingPlace;
 class Main {
 
     public static void main(String[] args) {
-        Parking parking = new Parking(100);
+        final int MAX_PARKING_PLACE = 100;
+        Parking parking = new Parking(MAX_PARKING_PLACE);
 
         parking.addIndex(
                     new ParkingPlace(0, new DataOwnerCar("abc", "", ""), "", true, false), 0);
@@ -20,9 +21,7 @@ class Main {
         System.out.println(parking.isNotPayed());
         System.out.println(parking.eraseBySurName("abc"));
         parking.getFreePlace();
-        parking.addAfterSurname(
-                new ParkingPlace(6, new DataOwnerCar("abcd", "", ""), "Porshe", true, false), "abc"
-        );
+        parking.addAfterSurname(null, "abc");
         System.out.println(parking.toString());
         parking.clearArray();
         System.out.println(parking.toString());

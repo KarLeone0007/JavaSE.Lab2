@@ -71,7 +71,7 @@ public class Parking {
     public Parking eraseBySurName(String _surname) {
         Parking parking = new Parking();
         for (int i = 0; i < this.list.length; i++) {
-            if (this.list[i].getData().getSurName().equals(_surname)) {
+            if (this.list[i] != null && this.list[i].getData().getSurName().equals(_surname)) {
                 parking.add(removeIndex(i));
                 i = 0;
             }
@@ -80,8 +80,7 @@ public class Parking {
     }
 
     public void getFreePlace() {
-        int MAX_PARKING_PLACE = 100;
-        for (int i = 0; i < MAX_PARKING_PLACE; ++i) {
+        for (int i = 0; i < this.list.length; ++i) {
             if (this.list[i] == null) {
                 System.out.println(i + " ");
             }
@@ -91,12 +90,12 @@ public class Parking {
     public void addAfterSurname(ParkingPlace parkingPlace, String surname) {
         int indexSurname = -1;
         for (ParkingPlace place : this.list) {
-            if (place.getData().getSurName().equals(surname)) {
+            if (place != null && place.getData().getSurName().equals(surname)) {
                 indexSurname = place.getData().getSurName().indexOf(surname);
                 break;
             }
         }
-        if (indexSurname >= 0) {
+        if (indexSurname != -1) {
             addIndex(parkingPlace, indexSurname + 1);
         }
     }
