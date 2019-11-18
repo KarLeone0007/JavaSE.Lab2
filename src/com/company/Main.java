@@ -7,7 +7,7 @@ import com.company.classes.ParkingPlace;
 public class Main {
 
     public static void main(String[] args) {
-        Parking parking = new Parking();
+        Parking parking = new Parking(100);
 
         parking.add(new ParkingPlace(1, new DataOwnerCar("1", "", ""), "", true, true));
         parking.add(new ParkingPlace(2, new DataOwnerCar("abc", "", ""), "", true, false));
@@ -20,8 +20,9 @@ public class Main {
         /*parking.addAfterSurname(
                     new ParkingPlace(54, new DataOwnerCar("example", "", ""), "", true, true), "1"
         );*/
+       // parking.getFreePlace();
+        System.out.println(parking.toString());
 
-        //System.out.println(parking.toString());
 
     }
 }

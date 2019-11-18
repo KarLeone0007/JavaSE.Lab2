@@ -3,7 +3,7 @@ package com.company.classes;
 import java.util.ArrayList;
 
 public class Parking {
-    private final ArrayList <ParkingPlace> List;
+    private ArrayList <ParkingPlace> List;
 
     public Parking() {
         this.List = new ArrayList<>();
@@ -11,6 +11,9 @@ public class Parking {
 
     public Parking(int length) {
         this.List = new ArrayList<>(length);
+        for (int i = 0; i < length; ++i) {
+            add(null);
+        }
     }
 
     public void addIndex(int position, ParkingPlace parkingPlace) {
@@ -46,7 +49,13 @@ public class Parking {
     }
 
     public void getFreePlace() {
-
+        int i = 0;
+        for (ParkingPlace parkingPlace: this.List) {
+            if (!parkingPlace.isParking()) {
+                ++i;
+                System.out.println(i);
+            }
+        }
     }
 
     public void addAfterSurname(ParkingPlace parkingPlace, String surname) {
@@ -63,8 +72,6 @@ public class Parking {
             addIndex(indexSurname + 1, parkingPlace);
         }
     }
-
-
 
     public void clearArray() {
         this.List.clear();
