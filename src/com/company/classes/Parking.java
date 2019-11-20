@@ -1,9 +1,11 @@
 package com.company.classes;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Parking {
-    private final ArrayList <ParkingPlace> List;
+    private ArrayList <ParkingPlace> List;
 
     public Parking() {
         this.List = new ArrayList<>();
@@ -11,6 +13,13 @@ public class Parking {
 
     public Parking(int length) {
         this.List = new ArrayList<>(length);
+        for (int i = 0; i < length; ++i) {
+            add(null);
+        }
+    }
+
+    public Parking(Parking parking) {
+        this.List = parking.List;
     }
 
     public void addIndex(int position, ParkingPlace parkingPlace) {
@@ -21,6 +30,12 @@ public class Parking {
 
     public void add(ParkingPlace parkingPlace) {
         this.List.add(parkingPlace);
+    }
+
+    public void setIndex(int position, ParkingPlace parkingPlace) {
+        if (position >= 0 && position <= this.List.size()) {
+            this.List.set(position, parkingPlace);
+        }
     }
 
 
@@ -42,26 +57,41 @@ public class Parking {
     }
 
     public void eraseBySurName(String _surname) {
-        this.List.removeIf(parkingPlace -> parkingPlace.getData().getSurName().equals(_surname));
+        this.List.removeIf(parkingPlace -> parkingPlace != null && parkingPlace.getData().getSurName().equals(_surname));
     }
 
     public void getFreePlace() {
-
+        for (int i = 0; i < this.List.size(); ++i) {
+            if (
+                    this.List.get(i) == null  || (!this.List.get(i).isMonthlyPayments() && !this.List.get(i).isParking())
+            ) {
+                System.out.println(this.List.get(i) + " " + i);
+            }
+        }
     }
 
     public void addAfterSurname(ParkingPlace parkingPlace, String surname) {
-        int indexSurname = 0;
-        for (ParkingPlace _parkingPlace: this.List) {
+        int indexSurname = -1;
+        for (int i = 0; i < this.List.size(); ++i) {
             if (
-                    _parkingPlace.getData().getSurName().equals(surname)
+                    this.List.get(i) != null && this.List.get(i).getData().getSurName().equals(surname)
             ) {
-                indexSurname = _parkingPlace.getData().getSurName().indexOf(surname);
+                indexSurname = i;
                 break;
             }
         }
         if (indexSurname != -1) {
             addIndex(indexSurname + 1, parkingPlace);
         }
+    }
+
+    BackupCollection backup = new BackupCollection();
+    public void writeJSON(Parking parking, String fileName) throws IOException {
+        this.backup.writeJSON(parking, fileName);
+    }
+
+    public Parking readJSON(String filename) throws FileNotFoundException {
+        return this.backup.readJSON(filename);
     }
 
 
