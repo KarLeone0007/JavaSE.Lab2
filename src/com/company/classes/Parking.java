@@ -1,6 +1,7 @@
 package com.company.classes;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Parking {
     private ArrayList <ParkingPlace> List;
@@ -26,6 +27,12 @@ public class Parking {
         this.List.add(parkingPlace);
     }
 
+    public void setIndex(int position, ParkingPlace parkingPlace) {
+        if (position >= 0 && position <= this.List.size()) {
+            this.List.set(position, parkingPlace);
+        }
+    }
+
 
     private ParkingPlace removeIndex(int position) {
         if(position >= 0 && position < this.List.size()) {
@@ -45,26 +52,26 @@ public class Parking {
     }
 
     public void eraseBySurName(String _surname) {
-        this.List.removeIf(parkingPlace -> parkingPlace.getData().getSurName().equals(_surname));
+        this.List.removeIf(parkingPlace -> parkingPlace != null && parkingPlace.getData().getSurName().equals(_surname));
     }
 
     public void getFreePlace() {
-        int i = 0;
-        for (ParkingPlace parkingPlace: this.List) {
-            if (!parkingPlace.isParking()) {
-                ++i;
-                System.out.println(i);
+        for (int i = 0; i < this.List.size(); ++i) {
+            if (
+                    this.List.get(i) == null  || (!this.List.get(i).isMonthlyPayments() && !this.List.get(i).isParking())
+            ) {
+                System.out.println(this.List.get(i) + " " + i);
             }
         }
     }
 
     public void addAfterSurname(ParkingPlace parkingPlace, String surname) {
-        int indexSurname = 0;
-        for (ParkingPlace _parkingPlace: this.List) {
+        int indexSurname = -1;
+        for (int i = 0; i < this.List.size(); ++i) {
             if (
-                    _parkingPlace.getData().getSurName().equals(surname)
+                    this.List.get(i) != null && this.List.get(i).getData().getSurName().equals(surname)
             ) {
-                indexSurname = _parkingPlace.getData().getSurName().indexOf(surname);
+                indexSurname = i;
                 break;
             }
         }
