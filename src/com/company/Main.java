@@ -7,8 +7,8 @@ import com.company.classes.ParkingPlace;
 class Main {
 
     public static void main(String[] args) {
-        final int MAX_PARKING_PLACE = 100;
-        Parking parking = new Parking(MAX_PARKING_PLACE);
+        final int PARKING_PLACE = 100;
+        Parking parking = new Parking(PARKING_PLACE);
 
         parking.addIndex(
                     new ParkingPlace(0, new DataOwnerCar("abc", "", ""), "", true, false), 0);
