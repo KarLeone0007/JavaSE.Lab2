@@ -4,7 +4,7 @@ import com.company.classes.DataOwnerCar;
 import com.company.classes.Parking;
 import com.company.classes.ParkingPlace;
 
-public class Main {
+class Main {
 
     public static void main(String[] args) {
         final int PARKING_PLACE = 100;
@@ -16,8 +16,8 @@ public class Main {
         parking.addIndex(3, new ParkingPlace(4, new DataOwnerCar("", "", ""), "", true, false));
         parking.addIndex(4, new ParkingPlace(5, new DataOwnerCar("1", "", ""), "", true, false));
 
-       //System.out.println(parking.isNotPayed());
-        //parking.eraseBySurName("abc");
+        System.out.println(parking.isNotPayed());
+        parking.eraseBySurName("abc");
         parking.addAfterSurname(
                     new ParkingPlace(54, new DataOwnerCar("example", "", ""), "", true, true), "sur"
         );

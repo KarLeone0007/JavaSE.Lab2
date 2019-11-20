@@ -1,10 +1,9 @@
 package com.company.classes;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Parking {
-    private ArrayList <ParkingPlace> List;
+    private final ArrayList <ParkingPlace> List;
 
     public Parking() {
         this.List = new ArrayList<>();
