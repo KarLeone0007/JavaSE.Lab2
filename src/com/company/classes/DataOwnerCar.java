@@ -1,26 +1,26 @@
 package com.company.classes;
 
-public class DataOwnerCar {
+public class DataOwnerCar { //данные владельца мащини
     private String surName;
     private String name;
     private String fatherName;
-    public DataOwnerCar() {}
-    public DataOwnerCar(String _surName, String _name, String _fatherName) {
-        this.surName = _surName;
-        this.name = _name;
+    public DataOwnerCar() {} //пустой констуктор
+    public DataOwnerCar(String _surName, String _name, String _fatherName) { //конструктор, в которм происходит инициализация переменных
+        this.surName = _surName;                                             // this. обращаемся к данному полю с модификатором доступа private
+        this.name = _name;                                                   // т.е. инкапсуляция
         this.fatherName = _fatherName;
     }
 
-    public String getSurName() {
-        return surName;
+    public String getSurName() {                                               //метод для того, чтобы получить данные, так как поле private, a метод public
+        return this.surName;
     }
 
-    @Override
+    @Override                                                                   //собственно и вывод
     public String toString() {
         return "DataOwnerCar{" +
-                "surName='" + surName + '\'' +
-                ", name='" + name + '\'' +
-                ", fatherName='" + fatherName + '\'' +
+                "surName='" + this.surName + '\'' +
+                ", name='" + this.name + '\'' +
+                ", fatherName='" + this.fatherName + '\'' +
                 '}';
     }
 }
